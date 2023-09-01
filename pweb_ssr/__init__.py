@@ -1,0 +1,1 @@
+from pweb_ssr.common.pweb_ssr_structure import SSRTemplateAssets
