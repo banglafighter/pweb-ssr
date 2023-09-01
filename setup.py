@@ -18,9 +18,9 @@ def get_dependencies():
 
 
 setup(
-    name='pweb-jinja',
+    name='pweb-ssr',
     version='1.0.0',
-    url='https://github.com/problemfighter/pweb-jinja',
+    url='https://github.com/problemfighter/pweb-ssr',
     license='Apache 2.0',
     author='Problem Fighter',
     author_email='problemfighter.com@gmail.com',
