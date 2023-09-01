@@ -18,13 +18,13 @@ def get_dependencies():
 
 
 setup(
-    name='pweb-jinja',
+    name='pweb-ssr',
     version='1.0.0',
-    url='https://github.com/problemfighter/pweb-jinja',
+    url='https://github.com/problemfighter/pweb-ssr',
     license='Apache 2.0',
     author='Problem Fighter',
     author_email='problemfighter.com@gmail.com',
-    description='Modified Jinja engine for PWeb Application',
+    description='Server Side Rendered UI, Form, Table Header, Item Per Page, Pagination, Jinja Customization things',
     long_description=README,
     long_description_content_type='text/markdown',
     packages=find_packages(),
