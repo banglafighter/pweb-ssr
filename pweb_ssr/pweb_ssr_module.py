@@ -2,7 +2,7 @@ from pweb import PWebComponentRegister
 from pweb_ssr.pweb_jinja_extend import PWebJinjaExtend
 
 
-class PWebSSRRegistry(PWebComponentRegister):
+class PWebSSRModule(PWebComponentRegister):
 
     def register_model(self, pweb_db) -> list:
         pass
