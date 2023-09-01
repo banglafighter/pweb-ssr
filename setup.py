@@ -24,7 +24,7 @@ setup(
     license='Apache 2.0',
     author='Problem Fighter',
     author_email='problemfighter.com@gmail.com',
-    description='Modified Jinja engine for PWeb Application',
+    description='Server Side Rendered UI, Form, Table Header, Item Per Page, Pagination, Jinja Customization things',
     long_description=README,
     long_description_content_type='text/markdown',
     packages=find_packages(),
