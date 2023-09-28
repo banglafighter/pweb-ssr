@@ -1,0 +1,53 @@
+== Field Data
+* name
+* label
+* value
+* inputType
+* defaultValue
+* required
+* placeholder [For select first entry as well]
+* errorText
+* isError
+* helpText
+* isWrapper
+* isLabel
+* attributes [Dictionary]
+
+* selectOptions
+* isMultiSelect
+
+
+== Form Input
+show full Input area with label, input, error, help
+
+=== Params
+* isWrapper
+* wrapperClass
+* wrapperId
+* inputClass
+* inputId
+* isLabel
+
+== Input Error
+only show the error message with error wrapper
+
+== Error Class
+Sometime need to add class in input for show error border
+
+== Input Help
+Will show help under the text with wrapper and message
+
+== make checked
+Basically use for checked radio and checkbox
+
+== make select
+Select option item
+
+== set value
+if needed only available value should set then it will work, ignore None, "", but 0 is allowed
+
+
+== Note
+```html
+<option value="" disabled selected hidden>Please Choose...</option>
+```

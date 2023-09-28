@@ -1,6 +1,6 @@
 class PWebJinjaExtend:
     _extensions = [
-        "pweb_ssr.form.form_tag_registry.FormInput"
+        "pweb_ssr.form.form_input.FormInput"
     ]
 
     def register(self, pweb_app):
