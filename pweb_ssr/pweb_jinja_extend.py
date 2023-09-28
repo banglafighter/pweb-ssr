@@ -1,6 +1,12 @@
 class PWebJinjaExtend:
     _extensions = [
-        "pweb_ssr.form.form_input.FormInput"
+        "pweb_ssr.form.form_input.FormInput",
+        "pweb_ssr.form.input_common.InputError",
+        "pweb_ssr.form.input_common.ErrorClass",
+        "pweb_ssr.form.input_common.InputHelp",
+        "pweb_ssr.form.input_common.MakeChecked",
+        "pweb_ssr.form.input_common.MakeSelect",
+        "pweb_ssr.form.input_common.SetValue",
     ]
 
     def register(self, pweb_app):
