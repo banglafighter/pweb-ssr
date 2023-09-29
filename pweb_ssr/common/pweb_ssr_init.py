@@ -1,5 +1,6 @@
 from flask import Blueprint
 import pweb_ssr.common.pweb_ssr_config
+from application.config.app_config import Config
 from ppy_common import ObjectHelper
 from pweb_ssr import SSRTemplateAssets
 from pweb_ssr.common.pweb_ssr_config import PWebSSRConfig
@@ -23,3 +24,7 @@ class PWebSSRInit:
     @staticmethod
     def merge_config(config):
         ObjectHelper.copy_config_property(config, pweb_ssr.common.pweb_ssr_config.PWebSSRConfig)
+
+    @staticmethod
+    def get_app_name():
+        return Config.APP_NAME

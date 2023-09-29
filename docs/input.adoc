@@ -23,12 +23,10 @@ It will generate from Form Definition.
 show full Input area with label, input, error, help
 
 === Params
-* isWrapper
-* wrapperClass
-* wrapperId
-* inputClass
-* inputId
-* isLabel
+* wrapper
+* wrapper_id
+* input_class
+* input_id
 
 == Input Error
 only show the error message with error wrapper

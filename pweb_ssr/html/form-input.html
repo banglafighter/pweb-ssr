@@ -1,2 +1,38 @@
+{% if field.isWrapper %}
+    <div {{ wrapper_attributes }}>
+{% endif %}
 
-<h1> Form Input</h1>
+
+    {% if field.label and field.isLabel %}
+        <label class="{{ label_class }}">
+            {% if field.required %}
+                <span class="{{ label_required_class }}">*</span>
+            {% endif %}
+            {{ field.label }}
+        </label>
+    {% endif %}
+
+    {% if field.inputType == "textarea" %}
+        <textarea>{{ field.value }}</textarea>
+    {%- elif field.inputType == "select" %}
+        <select></select>
+    {% else %}
+        <input {{ input_attributes }} />
+    {% endif %}
+
+
+    {% if field.errorText and (field.isErrorTextOn or field.isError) %}
+        <div class="{{ error_message_class }}">
+            {{- field.errorText }}
+        </div>
+    {% endif %}
+
+    {% if field.helpText %}
+        <div class="{{ help_message_class }}">
+            {{- field.helpText }}
+        </div>
+    {% endif %}
+
+{% if field.isWrapper %}
+    </div>
+{% endif %}
