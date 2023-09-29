@@ -6,4 +6,4 @@ class FormInput(StandaloneTag):
     tags = {"form_input"}
 
     def render(self, field: FormField, *args, **kwargs):
-        return "Working Fine"
+        return "Form Input"
