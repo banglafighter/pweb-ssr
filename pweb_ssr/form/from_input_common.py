@@ -133,7 +133,7 @@ class FormInputCommon:
             "field": field
         }
 
-        if field.inputType == "checkbox":
+        if field.inputType == "checkbox" or field.inputType == "radio":
             params["label_class"] = PWebSSRConfig.INPUT_LABEL_CHECKBOX_CLASS_NAME
         else:
             params["label_class"] = PWebSSRConfig.INPUT_LABEL_CLASS_NAME
