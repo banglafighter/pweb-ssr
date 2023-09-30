@@ -142,3 +142,23 @@ class FormInputCommon:
             "field": field
         }
         return ssr_ui_render_html_file(self.help_message_html(), params=params)
+
+    def get_error_class(self, field: FormField, kwargs):
+        if field.isError:
+            return PWebSSRConfig.INPUT_ERROR_CLASS_NAME
+        return ""
+
+    def get_make_checked(self, key, value, kwargs):
+        if str(key) == str(value):
+            return "checked"
+        return ""
+
+    def get_make_select(self, key, value, kwargs):
+        if str(key) == str(value):
+            return "selected"
+        return ""
+
+    def get_set_value(self, value, kwargs):
+        if value or value == 0:
+            return f"value='{value}'"
+        return value

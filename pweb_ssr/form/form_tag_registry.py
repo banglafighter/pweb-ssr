@@ -23,8 +23,8 @@ class InputError(StandaloneTag):
 class ErrorClass(StandaloneTag):
     tags = {"error_class"}
 
-    def render(self, *args, **kwargs):
-        return "Working Fine"
+    def render(self, field: FormField, *args, **kwargs):
+        return form_input_common.get_error_class(field=field, kwargs=kwargs)
 
 
 class InputHelp(StandaloneTag):
@@ -37,19 +37,19 @@ class InputHelp(StandaloneTag):
 class MakeChecked(StandaloneTag):
     tags = {"make_checked"}
 
-    def render(self, *args, **kwargs):
-        return "Working Fine"
+    def render(self, key, value, *args, **kwargs):
+        return form_input_common.get_make_checked(key=key, value=value, kwargs=kwargs)
 
 
 class MakeSelect(StandaloneTag):
     tags = {"make_select"}
 
-    def render(self, *args, **kwargs):
-        return "Working Fine"
+    def render(self, key, value, *args, **kwargs):
+        return form_input_common.get_make_select(key=key, value=value, kwargs=kwargs)
 
 
 class SetValue(StandaloneTag):
     tags = {"set_value"}
 
-    def render(self, *args, **kwargs):
-        return "Working Fine"
+    def render(self, value, *args, **kwargs):
+        return form_input_common.get_set_value(value=value, kwargs=kwargs)
