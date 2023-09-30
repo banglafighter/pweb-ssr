@@ -16,8 +16,8 @@ class FormInput(StandaloneTag):
 class InputError(StandaloneTag):
     tags = {"input_error"}
 
-    def render(self, *args, **kwargs):
-        return "Working Fine"
+    def render(self, field: FormField, *args, **kwargs):
+        return form_input_common.get_input_error(field=field, kwargs=kwargs)
 
 
 class ErrorClass(StandaloneTag):
@@ -30,8 +30,8 @@ class ErrorClass(StandaloneTag):
 class InputHelp(StandaloneTag):
     tags = {"input_help"}
 
-    def render(self, *args, **kwargs):
-        return "Working Fine"
+    def render(self, field: FormField, *args, **kwargs):
+        return form_input_common.get_input_help(field=field, kwargs=kwargs)
 
 
 class MakeChecked(StandaloneTag):

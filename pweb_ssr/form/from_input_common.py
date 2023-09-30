@@ -18,6 +18,9 @@ class FormInputCommon:
     def error_message_html(self):
         return FileUtil.join_path(self.get_html_path(), "error-message.html")
 
+    def help_message_html(self):
+        return FileUtil.join_path(self.get_html_path(), "help-message.html")
+
     def pagination_html(self):
         return FileUtil.join_path(self.get_html_path(), "pagination.html")
 
@@ -125,3 +128,17 @@ class FormInputCommon:
 
         params = self._get_select_options(field=field, params=params)
         return ssr_ui_render_html_file(self.form_input_html(), params=params)
+
+    def get_input_error(self, field: FormField, kwargs):
+        params = {
+            "error_message_class": PWebSSRConfig.INPUT_ERROR_MESSAGE_CLASS_NAME,
+            "field": field
+        }
+        return ssr_ui_render_html_file(self.error_message_html(), params=params)
+
+    def get_input_help(self, field: FormField, kwargs):
+        params = {
+            "help_message_class": PWebSSRConfig.INPUT_HELP_MESSAGE_CLASS_NAME,
+            "field": field
+        }
+        return ssr_ui_render_html_file(self.help_message_html(), params=params)
