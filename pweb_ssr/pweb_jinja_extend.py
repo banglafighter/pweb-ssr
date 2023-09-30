@@ -14,6 +14,10 @@ class PWebJinjaExtend:
         "pweb_ssr.form.form_tag_registry.MakeChecked",
         "pweb_ssr.form.form_tag_registry.MakeSelect",
         "pweb_ssr.form.form_tag_registry.SetValue",
+
+        "pweb_ssr.table.table_tag_registry.SortableHeader",
+        "pweb_ssr.table.table_tag_registry.Pagination",
+        "pweb_ssr.table.table_tag_registry.SearchNameValue",
     ]
 
     def register(self, pweb_app):

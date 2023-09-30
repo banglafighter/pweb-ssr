@@ -1,33 +1,12 @@
-import pathlib
 from copy import copy
-
-from ppy_file_text import FileUtil
 from pweb_form_rest import FormField
 from pweb_form_rest.ui.pweb_ui_helper import ssr_ui_render_html_file
 from pweb_ssr.common.pweb_ssr_config import PWebSSRConfig
+from pweb_ssr.common.pweb_ssr_html_file import PWebSSRHTMLFile
 
 
 class FormInputCommon:
-    def get_html_path(self):
-        if PWebSSRConfig.SSR_HTML_PATH:
-            return PWebSSRConfig.SSR_HTML_PATH
-        path = pathlib.Path(__file__).parent.parent.resolve()
-        return FileUtil.join_path(path, "html")
-
-    def form_input_html(self):
-        return FileUtil.join_path(self.get_html_path(), "form-input.html")
-
-    def error_message_html(self):
-        return FileUtil.join_path(self.get_html_path(), "error-message.html")
-
-    def help_message_html(self):
-        return FileUtil.join_path(self.get_html_path(), "help-message.html")
-
-    def pagination_html(self):
-        return FileUtil.join_path(self.get_html_path(), "pagination.html")
-
-    def sortable_header_html(self):
-        return FileUtil.join_path(self.get_html_path(), "sortable-header.html")
+    html_file: PWebSSRHTMLFile = PWebSSRHTMLFile()
 
     def dict_to_attribute(self, dictionary: dict, ignore: list = []):
         attributes = ""
@@ -139,21 +118,21 @@ class FormInputCommon:
             params["label_class"] = PWebSSRConfig.INPUT_LABEL_CLASS_NAME
 
         params = self._get_select_options(field=field, params=params)
-        return ssr_ui_render_html_file(self.form_input_html(), params=params)
+        return ssr_ui_render_html_file(self.html_file.form_input_html(), params=params)
 
     def get_input_error(self, field: FormField, kwargs):
         params = {
             "error_message_class": PWebSSRConfig.INPUT_ERROR_MESSAGE_CLASS_NAME,
             "field": field
         }
-        return ssr_ui_render_html_file(self.error_message_html(), params=params)
+        return ssr_ui_render_html_file(self.html_file.error_message_html(), params=params)
 
     def get_input_help(self, field: FormField, kwargs):
         params = {
             "help_message_class": PWebSSRConfig.INPUT_HELP_MESSAGE_CLASS_NAME,
             "field": field
         }
-        return ssr_ui_render_html_file(self.help_message_html(), params=params)
+        return ssr_ui_render_html_file(self.html_file.help_message_html(), params=params)
 
     def get_error_class(self, field: FormField, kwargs):
         if field.isError:

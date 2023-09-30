@@ -16,3 +16,10 @@ class PWebSSRConfig:
     INPUT_ERROR_CLASS_NAME = "is-invalid"
     INPUT_ERROR_MESSAGE_CLASS_NAME = "invalid-feedback"
     INPUT_HELP_MESSAGE_CLASS_NAME = "form-text"
+
+    # Table Related Class
+    TABLE_SORT_ICON_NAME = "fa-sort"
+    TABLE_SORT_ASC_ICON_NAME = "fa-sort-down"
+    TABLE_SORT_DESC_ICON_NAME = "fa-sort-up"
+    TABLE_SORT_ICON_OTHER_CLASS_NAME = "me-1 fas"
+    TABLE_SORT_LINK_CLASS_NAME = "text-decoration-none"
