@@ -1,5 +1,5 @@
 {% if field.isWrapper %}
-    <div {{ wrapper_attributes }}>
+    <div {{ wrapper_attributes |safe }}>
 {% endif %}
 
 
@@ -13,11 +13,20 @@
     {% endif %}
 
     {% if field.inputType == "textarea" %}
-        <textarea>{{ field.value }}</textarea>
+        <textarea {{ input_attributes |safe }} >{{- field.value }}</textarea>
     {%- elif field.inputType == "select" %}
-        <select></select>
+        <select {{ input_attributes |safe }}>
+            {% if field.placeholder and not field.value %}
+                <option disabled hidden selected value>{{- field.placeholder }}</option>
+            {% endif %}
+            {% for option in options %}
+                <option value="{{- option.value }}" {% if option.selected %}selected{% endif %}>
+                    {{ option.label }}
+                </option>
+            {% endfor %}
+        </select>
     {% else %}
-        <input {{ input_attributes }} />
+        <input {{ input_attributes |safe }} />
     {% endif %}
 
 

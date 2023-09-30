@@ -33,7 +33,7 @@ class FormInputCommon:
             if dictionary[key] == True:
                 attributes += f" {key}"
             elif dictionary[key]:
-                attributes += f" {key}={dictionary[key]}"
+                attributes += f" {key}='{dictionary[key]}'"
             attributes = attributes.strip()
         return attributes
 
@@ -49,14 +49,7 @@ class FormInputCommon:
             return f"{concat}".strip()
         return default
 
-    def get_form_input(self, field: FormField, kwargs):
-        params = {
-            "label_class": PWebSSRConfig.INPUT_LABEL_CLASS_NAME,
-            "label_required_class": PWebSSRConfig.INPUT_REQUIRED_SIGN_CLASS_NAME,
-            "help_message_class": PWebSSRConfig.INPUT_HELP_MESSAGE_CLASS_NAME,
-            "error_message_class": PWebSSRConfig.INPUT_ERROR_MESSAGE_CLASS_NAME,
-        }
-
+    def _get_wrapper_attribute(self, kwargs):
         wrapper_attribute_dict = {}
         wrapper_class = self.get_kwargs_value(kwargs=kwargs, key="wrapper", default=None)
         if wrapper_class:
@@ -66,8 +59,9 @@ class FormInputCommon:
         if wrapper_id:
             wrapper_attribute_dict["id"] = wrapper_id
 
-        params["wrapper_attributes"] = self.dict_to_attribute(dictionary=wrapper_attribute_dict)
+        return self.dict_to_attribute(dictionary=wrapper_attribute_dict)
 
+    def _get_input_attribute(self, field: FormField, kwargs):
         input_class = PWebSSRConfig.INPUT_CLASS_NAME
         if field.inputType == "select":
             input_class = PWebSSRConfig.SELECT_CLASS_NAME
@@ -78,7 +72,7 @@ class FormInputCommon:
         if field.isError:
             field.add_attribute("class", PWebSSRConfig.INPUT_ERROR_CLASS_NAME)
 
-        if field.placeholder:
+        if field.placeholder and field.inputType != "select":
             field.add_attribute("placeholder", field.placeholder)
 
         if field.required:
@@ -88,6 +82,36 @@ class FormInputCommon:
             field.add_attribute("value", field.value)
             field.add_attribute("type", field.inputType)
 
-        params["input_attributes"] = self.dict_to_attribute(field.allAttributes)
-        params["field"] = field
+        return self.dict_to_attribute(field.allAttributes)
+
+    def _get_select_options(self, field: FormField, params):
+        if field.inputType != "select" or not field.selectOptions:
+            return params
+
+        options = []
+        for item in field.selectOptions:
+            label = field.selectOptions[item]
+            option = {
+                "label": label,
+                "value": item,
+            }
+            if field.value and str(field.value) == str(item):
+                option['selected'] = True
+            elif field.defaultValue and str(field.defaultValue) == str(item):
+                option['selected'] = True
+            options.append(option)
+        params["options"] = options
+        return params
+
+    def get_form_input(self, field: FormField, kwargs):
+        params = {
+            "label_class": PWebSSRConfig.INPUT_LABEL_CLASS_NAME,
+            "label_required_class": PWebSSRConfig.INPUT_REQUIRED_SIGN_CLASS_NAME,
+            "help_message_class": PWebSSRConfig.INPUT_HELP_MESSAGE_CLASS_NAME,
+            "error_message_class": PWebSSRConfig.INPUT_ERROR_MESSAGE_CLASS_NAME,
+            "wrapper_attributes": self._get_wrapper_attribute(kwargs=kwargs),
+            "input_attributes": self._get_input_attribute(field=field, kwargs=kwargs),
+            "field": field
+        }
+        params = self._get_select_options(field=field, params=params)
         return ssr_ui_render_html_file(self.form_input_html(), params=params)
