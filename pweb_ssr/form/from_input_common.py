@@ -1,4 +1,6 @@
 import pathlib
+from copy import copy
+
 from ppy_file_text import FileUtil
 from pweb_form_rest import FormField
 from pweb_form_rest.ui.pweb_ui_helper import ssr_ui_render_html_file
@@ -55,7 +57,7 @@ class FormInputCommon:
     def _get_wrapper_attribute(self, field: FormField, kwargs):
         wrapper_attribute_dict = {}
         concat = None
-        if field.inputType == "checkbox":
+        if field.inputType == "checkbox" or field.inputType == "radio":
             concat = PWebSSRConfig.CHECKBOX_WRAPPER_CLASS_NAME
         wrapper_class = self.get_kwargs_value(kwargs=kwargs, key="wrapper", default=None, concat=concat)
         if wrapper_class:
@@ -71,11 +73,12 @@ class FormInputCommon:
         input_class = PWebSSRConfig.INPUT_CLASS_NAME
         if field.inputType == "select":
             input_class = PWebSSRConfig.SELECT_CLASS_NAME
-        elif field.inputType == "checkbox":
+        elif field.inputType == "checkbox" or field.inputType == "radio":
             input_class = PWebSSRConfig.CHECKBOX_CLASS_NAME
 
         field.add_attribute("class", self.get_kwargs_value(kwargs=kwargs, key="input_class", concat=input_class))
         field.add_attribute("id", self.get_kwargs_value(kwargs=kwargs, key="input_id"))
+        field.add_attribute("name", field.name)
 
         if field.isError:
             field.add_attribute("class", PWebSSRConfig.INPUT_ERROR_CLASS_NAME)
@@ -111,7 +114,16 @@ class FormInputCommon:
         params["options"] = options
         return params
 
+    def _overwrite_by_kwargs(self, field: FormField, kwargs):
+        overwrite_attrs = ["label", "value"]
+        for name in overwrite_attrs:
+            if name in kwargs and hasattr(field, name):
+                setattr(field, name, kwargs[name])
+        return field
+
     def get_form_input(self, field: FormField, kwargs):
+        field = copy(field)
+        field = self._overwrite_by_kwargs(field=field, kwargs=kwargs)
         params = {
             "label_required_class": PWebSSRConfig.INPUT_REQUIRED_SIGN_CLASS_NAME,
             "help_message_class": PWebSSRConfig.INPUT_HELP_MESSAGE_CLASS_NAME,
