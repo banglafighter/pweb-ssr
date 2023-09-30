@@ -2,6 +2,9 @@
     <div {{ wrapper_attributes |safe }}>
 {% endif %}
 
+    {% if field.inputType == "checkbox" %}
+    	<input {{ input_attributes |safe }} />
+    {% endif %} 
 
     {% if field.label and field.isLabel %}
         <label class="{{ label_class }}">
@@ -25,7 +28,7 @@
                 </option>
             {% endfor %}
         </select>
-    {% else %}
+    {% elif field.inputType != "checkbox" %}
         <input {{ input_attributes |safe }} />
     {% endif %}
 

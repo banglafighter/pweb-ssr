@@ -49,9 +49,12 @@ class FormInputCommon:
             return f"{concat}".strip()
         return default
 
-    def _get_wrapper_attribute(self, kwargs):
+    def _get_wrapper_attribute(self, field: FormField, kwargs):
         wrapper_attribute_dict = {}
-        wrapper_class = self.get_kwargs_value(kwargs=kwargs, key="wrapper", default=None)
+        concat = None
+        if field.inputType == "checkbox":
+            concat = PWebSSRConfig.CHECKBOX_WRAPPER_CLASS_NAME
+        wrapper_class = self.get_kwargs_value(kwargs=kwargs, key="wrapper", default=None, concat=concat)
         if wrapper_class:
             wrapper_attribute_dict["class"] = wrapper_class
 
@@ -65,6 +68,8 @@ class FormInputCommon:
         input_class = PWebSSRConfig.INPUT_CLASS_NAME
         if field.inputType == "select":
             input_class = PWebSSRConfig.SELECT_CLASS_NAME
+        elif field.inputType == "checkbox":
+            input_class = PWebSSRConfig.CHECKBOX_CLASS_NAME
 
         field.add_attribute("class", self.get_kwargs_value(kwargs=kwargs, key="input_class", concat=input_class))
         field.add_attribute("id", self.get_kwargs_value(kwargs=kwargs, key="input_id"))
@@ -105,13 +110,18 @@ class FormInputCommon:
 
     def get_form_input(self, field: FormField, kwargs):
         params = {
-            "label_class": PWebSSRConfig.INPUT_LABEL_CLASS_NAME,
             "label_required_class": PWebSSRConfig.INPUT_REQUIRED_SIGN_CLASS_NAME,
             "help_message_class": PWebSSRConfig.INPUT_HELP_MESSAGE_CLASS_NAME,
             "error_message_class": PWebSSRConfig.INPUT_ERROR_MESSAGE_CLASS_NAME,
-            "wrapper_attributes": self._get_wrapper_attribute(kwargs=kwargs),
+            "wrapper_attributes": self._get_wrapper_attribute(kwargs=kwargs, field=field),
             "input_attributes": self._get_input_attribute(field=field, kwargs=kwargs),
             "field": field
         }
+
+        if field.inputType == "checkbox":
+            params["label_class"] = PWebSSRConfig.INPUT_LABEL_CHECKBOX_CLASS_NAME
+        else:
+            params["label_class"] = PWebSSRConfig.INPUT_LABEL_CLASS_NAME
+
         params = self._get_select_options(field=field, params=params)
         return ssr_ui_render_html_file(self.form_input_html(), params=params)
