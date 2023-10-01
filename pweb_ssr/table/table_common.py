@@ -91,3 +91,9 @@ class TableCommon:
             "item_per_page_selected": self.request_data.get_query_args_value(PWebFRConfig.ITEM_PER_PAGE_PARAM_NAME, PWebFRConfig.TOTAL_ITEM_PER_PAGE),
         }
         return ssr_ui_render_html_file(self.html_file.pagination_html(), params=params)
+
+    def search_name_value(self):
+        value = self.request_data.get_query_args_value(PWebFRConfig.SEARCH_FIELD_PARAM_NAME, "#")
+        if not value or value == "#":
+            value = ""
+        return "name='" + PWebFRConfig.SEARCH_FIELD_PARAM_NAME + "' value='" + value + "'"

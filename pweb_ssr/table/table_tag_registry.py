@@ -22,4 +22,4 @@ class SearchNameValue(StandaloneTag):
     tags = {"search_name_value"}
 
     def render(self, *args, **kwargs):
-        return ""
+        return table_common.search_name_value()
