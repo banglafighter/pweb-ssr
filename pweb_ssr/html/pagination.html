@@ -1,0 +1,24 @@
+<div class="row justify-content-end">
+    <div class="col-auto">
+        <form>
+            <select class="form-select" name="{{ item_per_page_name }}" onchange="this.form.submit()">
+                {% for item in item_per_page_options %}
+                    <option value="{{ item }}" {% if item_per_page_selected == item|string %}selected{% endif %}>
+                        {{ item }}
+                    </option>
+                {% endfor %}
+            </select>
+        </form>
+    </div>
+    <div class="col-auto">
+        <ul class="pagination">
+            {% for page in pages %}
+                <li class="page-item {% if page.selected %}active{% endif %}">
+                    <a class="page-link pagination-link" href="{{ page.url }}">
+                        {{ page.text }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

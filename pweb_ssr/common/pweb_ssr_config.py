@@ -23,3 +23,4 @@ class PWebSSRConfig:
     TABLE_SORT_DESC_ICON_NAME = "fa-sort-up"
     TABLE_SORT_ICON_OTHER_CLASS_NAME = "me-1 fas"
     TABLE_SORT_LINK_CLASS_NAME = "text-decoration-none"
+    TABLE_ITEM_PER_PAGE_OPTIONS: str = [25, 50, 100, 200, 500]

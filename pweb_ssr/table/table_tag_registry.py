@@ -15,7 +15,7 @@ class Pagination(StandaloneTag):
     tags = {"pagination"}
 
     def render(self, current_page: int, total_page: int, *args, **kwargs):
-        return ""
+        return table_common.pagination(current_page=current_page, total_page=total_page, kwargs=kwargs)
 
 
 class SearchNameValue(StandaloneTag):
