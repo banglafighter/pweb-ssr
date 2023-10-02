@@ -14,7 +14,7 @@ class FormInputCommon:
             if key in ignore:
                 continue
 
-            if dictionary[key] == True:
+            if dictionary[key] == True and key != "value":
                 attributes += f" {key}"
             elif dictionary[key]:
                 attributes += f" {key}='{dictionary[key]}'"
@@ -93,8 +93,17 @@ class FormInputCommon:
         params["options"] = options
         return params
 
+    def _set_radio_checkbox_attrs(self, field: FormField):
+        if field.inputType != "checkbox" and field.inputType != "radio":
+            return field
+
+        if str(field.checked) == str(field.value):
+            field.add_attribute("checked", True)
+        field.value = f"{field.checked}"
+        return field
+
     def _overwrite_by_kwargs(self, field: FormField, kwargs):
-        overwrite_attrs = ["label", "value"]
+        overwrite_attrs = ["label", "value", "checked", "unchecked"]
         for name in overwrite_attrs:
             if name in kwargs and hasattr(field, name):
                 setattr(field, name, kwargs[name])
@@ -103,6 +112,7 @@ class FormInputCommon:
     def get_form_input(self, field: FormField, kwargs):
         field = copy(field)
         field = self._overwrite_by_kwargs(field=field, kwargs=kwargs)
+        field = self._set_radio_checkbox_attrs(field=field)
         params = {
             "label_required_class": PWebSSRConfig.INPUT_REQUIRED_SIGN_CLASS_NAME,
             "help_message_class": PWebSSRConfig.INPUT_HELP_MESSAGE_CLASS_NAME,

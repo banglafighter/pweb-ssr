@@ -4,7 +4,7 @@
 
     {% if field.inputType == "checkbox" or field.inputType == "radio" %}
     	<input {{ input_attributes |safe }} />
-    {% endif %} 
+    {% endif %}
 
     {% if field.label and field.isLabel %}
         <label class="{{ label_class }}">
