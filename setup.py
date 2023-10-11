@@ -19,7 +19,7 @@ def get_dependencies():
 
 setup(
     name='pweb-ssr',
-    version='0.0.2',
+    version='0.0.3',
     url='https://github.com/problemfighter/pweb-ssr',
     license='Apache 2.0',
     author='Problem Fighter',
@@ -27,6 +27,7 @@ setup(
     description='Server Side Rendered UI, Form, Table Header, Item Per Page, Pagination, Jinja Customization things',
     long_description=README,
     long_description_content_type='text/markdown',
+    package_data={'pweb_ssr': ['html/**/*']},
     packages=find_packages(),
     zip_safe=False,
     include_package_data=True,
