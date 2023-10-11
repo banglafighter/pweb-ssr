@@ -14,7 +14,7 @@ def get_dependencies():
     if env and env == "code":
         return dependency
 
-    return dependency + ["ppy-common", "pweb-form-rest"]
+    return dependency + ["ppy-common"]
 
 
 setup(
