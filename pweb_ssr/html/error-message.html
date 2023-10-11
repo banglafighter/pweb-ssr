@@ -1,0 +1,5 @@
+{% if field.errorText and (field.isErrorTextOn or field.isError) %}
+    <div class="{{ error_message_class }}">
+        {{- field.errorText }}
+    </div>
+{% endif %}

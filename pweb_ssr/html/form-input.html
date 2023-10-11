@@ -1,0 +1,50 @@
+{% if field.isWrapper %}
+    <div {{ wrapper_attributes |safe }}>
+{% endif %}
+
+    {% if field.inputType == "checkbox" or field.inputType == "radio" %}
+    	<input {{ input_attributes |safe }} />
+    {% endif %}
+
+    {% if field.label and field.isLabel %}
+        <label class="{{ label_class }}">
+            {% if field.required %}
+                <span class="{{ label_required_class }}">*</span>
+            {% endif %}
+            {{ field.label }}
+        </label>
+    {% endif %}
+
+    {% if field.inputType == "textarea" %}
+        <textarea {{ input_attributes |safe }} >{{- field.value }}</textarea>
+    {%- elif field.inputType == "select" %}
+        <select {{ input_attributes |safe }}>
+            {% if field.placeholder and not field.value %}
+                <option disabled hidden selected value>{{- field.placeholder }}</option>
+            {% endif %}
+            {% for option in options %}
+                <option value="{{- option.value }}" {% if option.selected %}selected{% endif %}>
+                    {{ option.label }}
+                </option>
+            {% endfor %}
+        </select>
+    {% elif field.inputType != "checkbox" and field.inputType != "radio" %}
+        <input {{ input_attributes |safe }} />
+    {% endif %}
+
+
+    {% if field.errorText and (field.isErrorTextOn or field.isError) %}
+        <div class="{{ error_message_class }}">
+            {{- field.errorText }}
+        </div>
+    {% endif %}
+
+    {% if field.helpText %}
+        <div class="{{ help_message_class }}">
+            {{- field.helpText }}
+        </div>
+    {% endif %}
+
+{% if field.isWrapper %}
+    </div>
+{% endif %}

@@ -1,0 +1,3 @@
+
+
+* Enum should save key but display value

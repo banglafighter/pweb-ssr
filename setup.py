@@ -11,15 +11,15 @@ env = os.environ.get('source')
 def get_dependencies():
     dependency = []
 
-    if env and env == "dev":
+    if env and env == "code":
         return dependency
 
-    return dependency + []
+    return dependency + ["ppy-common", "pweb-form-rest"]
 
 
 setup(
     name='pweb-ssr',
-    version='1.0.0',
+    version='0.0.2',
     url='https://github.com/problemfighter/pweb-ssr',
     license='Apache 2.0',
     author='Problem Fighter',

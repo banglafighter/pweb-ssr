@@ -8,7 +8,7 @@
 ## Documentation
 Install and update using [pip](https://pip.pypa.io/en/stable/getting-started/):
 ```bash
-pip install -U PWebSSR
+pip install -U pweb-ssr
 ```
 
 **Please find [the Documentation]() with example from [hmtmcse.com]()**
