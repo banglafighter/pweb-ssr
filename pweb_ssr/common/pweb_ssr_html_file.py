@@ -1,5 +1,4 @@
 import pathlib
-
 from ppy_file_text import FileUtil
 from pweb_ssr.common.pweb_ssr_config import PWebSSRConfig
 
