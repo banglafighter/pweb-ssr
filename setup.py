@@ -20,10 +20,10 @@ def get_dependencies():
 setup(
     name='pweb-ssr',
     version='0.0.3',
-    url='https://github.com/problemfighter/pweb-ssr',
+    url='https://github.com/banglafighter/pweb-ssr',
     license='Apache 2.0',
-    author='Problem Fighter',
-    author_email='problemfighter.com@gmail.com',
+    author='Bangla Fighter',
+    author_email='banglafighter.com@gmail.com',
     description='Server Side Rendered UI, Form, Table Header, Item Per Page, Pagination, Jinja Customization things',
     long_description=README,
     long_description_content_type='text/markdown',
