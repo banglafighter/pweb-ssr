@@ -1,3 +1,6 @@
+from typing import Union
+
+
 class SSRTemplateAssets:
     name: str = None
     import_name: str = None
@@ -13,7 +16,7 @@ class SSRTemplateAssets:
             static_folder: str,
             static_url_path: str,
             template_folder: str,
-            url_prefix: str | None = None,
+            url_prefix: Union[str, None] = None,
     ):
         self.name = name
         self.import_name = import_name
