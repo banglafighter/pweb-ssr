@@ -19,7 +19,7 @@ def get_dependencies():
 
 setup(
     name='pweb-ssr',
-    version='0.0.3',
+    version='0.0.4',
     url='https://github.com/banglafighter/pweb-ssr',
     license='Apache 2.0',
     author='Bangla Fighter',
