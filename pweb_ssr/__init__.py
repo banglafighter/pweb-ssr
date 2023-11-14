@@ -1,1 +1,2 @@
 from pweb_ssr.common.pweb_ssr_structure import SSRTemplateAssets
+from pweb_ssr.common.pweb_jinja_util import PWebJinjaUtil

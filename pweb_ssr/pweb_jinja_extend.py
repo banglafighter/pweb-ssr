@@ -1,3 +1,4 @@
+from pweb_ssr.common.pweb_jinja_util import PWebJinjaUtil
 from pweb_ssr.common.pweb_ssr_init import PWebSSRInit
 
 
@@ -29,7 +30,4 @@ class PWebJinjaExtend:
             pweb_app.jinja_env.add_extension(extension)
 
     def register_global_variable(self, pweb_app):
-        if pweb_app and pweb_app.jinja_env and pweb_app.jinja_env.globals:
-            for method in self._global_variables:
-                if method not in pweb_app.jinja_env.globals:
-                    pweb_app.jinja_env.globals[method] = self._global_variables[method]
+        PWebJinjaUtil.register_global_variable(pweb_app=pweb_app, variables=self._global_variables)
