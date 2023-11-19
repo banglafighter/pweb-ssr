@@ -1,4 +1,6 @@
 from copy import copy
+
+from ppy_jsonyml.util.json_util import JsonUtil
 from pweb_form_rest import FormField
 from pweb_form_rest.ui.pweb_ui_helper import ssr_ui_render_html_file
 from pweb_ssr.common.pweb_ssr_config import PWebSSRConfig
@@ -38,6 +40,14 @@ class FormInputCommon:
         concat = None
         if field.inputType == "checkbox" or field.inputType == "radio":
             concat = PWebSSRConfig.CHECKBOX_WRAPPER_CLASS_NAME
+
+        wrapper_attr = self.get_kwargs_value(kwargs=kwargs, key="wrapper_attr", default=None)
+        if wrapper_attr:
+            json_dict = JsonUtil.get_dict(wrapper_attr)
+            if json_dict:
+                for attr_name in json_dict:
+                    wrapper_attribute_dict[attr_name] = json_dict[attr_name]
+
         wrapper_class = self.get_kwargs_value(kwargs=kwargs, key="wrapper", default=None, concat=concat)
         if wrapper_class:
             wrapper_attribute_dict["class"] = wrapper_class
@@ -58,6 +68,13 @@ class FormInputCommon:
         field.add_attribute("class", self.get_kwargs_value(kwargs=kwargs, key="input_class", concat=input_class))
         field.add_attribute("id", self.get_kwargs_value(kwargs=kwargs, key="input_id"))
         field.add_attribute("name", field.name)
+
+        input_attr = self.get_kwargs_value(kwargs=kwargs, key="input_attr", default=None)
+        if input_attr:
+            json_dict = JsonUtil.get_dict(input_attr)
+            if json_dict:
+                for attr_name in json_dict:
+                    field.add_attribute(attr_name, json_dict[attr_name])
 
         if field.isError:
             field.add_attribute("class", PWebSSRConfig.INPUT_ERROR_CLASS_NAME)
@@ -103,7 +120,7 @@ class FormInputCommon:
         return field
 
     def _overwrite_by_kwargs(self, field: FormField, kwargs):
-        overwrite_attrs = ["label", "value", "checked", "unchecked"]
+        overwrite_attrs = ["label", "value", "checked", "unchecked", "required"]
         for name in overwrite_attrs:
             if name in kwargs and hasattr(field, name):
                 setattr(field, name, kwargs[name])
