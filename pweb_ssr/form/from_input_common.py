@@ -35,10 +35,10 @@ class FormInputCommon:
             return f"{concat}".strip()
         return default
 
-    def _get_wrapper_attribute(self, field: FormField, kwargs):
+    def _get_wrapper_attribute(self, field: FormField, kwargs, is_view=False):
         wrapper_attribute_dict = {}
         concat = None
-        if field.inputType == "checkbox" or field.inputType == "radio":
+        if not is_view and (field.inputType == "checkbox" or field.inputType == "radio"):
             concat = PWebSSRConfig.CHECKBOX_WRAPPER_CLASS_NAME
 
         wrapper_attr = self.get_kwargs_value(kwargs=kwargs, key="wrapper_attr", default=None)
@@ -125,6 +125,14 @@ class FormInputCommon:
             if name in kwargs and hasattr(field, name):
                 setattr(field, name, kwargs[name])
         return field
+
+    def get_form_view(self, field: FormField, kwargs):
+        field = copy(field)
+        params = {
+            "wrapper_attributes": self._get_wrapper_attribute(kwargs=kwargs, field=field, is_view=True),
+            "field": field
+        }
+        return ssr_ui_render_html_file(self.html_file.form_view_html(), params=params)
 
     def get_form_input(self, field: FormField, kwargs):
         field = copy(field)

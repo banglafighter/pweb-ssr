@@ -15,6 +15,7 @@ class PWebJinjaExtend:
         "pweb_ssr.form.form_tag_registry.MakeChecked",
         "pweb_ssr.form.form_tag_registry.MakeSelect",
         "pweb_ssr.form.form_tag_registry.SetValue",
+        "pweb_ssr.form.form_tag_registry.FormView",
 
         "pweb_ssr.table.table_tag_registry.SortableHeader",
         "pweb_ssr.table.table_tag_registry.Pagination",

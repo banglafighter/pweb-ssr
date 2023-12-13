@@ -24,3 +24,6 @@ class PWebSSRHTMLFile:
 
     def sortable_header_html(self):
         return FileUtil.join_path(self.get_html_path(), "sortable-header.html")
+
+    def form_view_html(self):
+        return FileUtil.join_path(self.get_html_path(), "form-view.html")

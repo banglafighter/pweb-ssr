@@ -53,3 +53,10 @@ class SetValue(StandaloneTag):
 
     def render(self, value, *args, **kwargs):
         return form_input_common.get_set_value(value=value, kwargs=kwargs)
+
+
+class FormView(StandaloneTag):
+    tags = {"form_view"}
+
+    def render(self, field: FormField, *args, **kwargs):
+        return form_input_common.get_form_view(field=field, kwargs=kwargs)
