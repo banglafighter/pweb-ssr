@@ -1,0 +1,13 @@
+{% if field.isWrapper %}
+    <div {{ wrapper_attributes |safe }}>
+{% endif %}
+
+<div class="form-floating">
+    <div class="form-control fw-bold h-auto min-h-details">{{- field.value |default("", True) }}</div>
+    <label class="details-label-fs">{{- field.label }}</label>
+</div>
+
+
+{% if field.isWrapper %}
+    </div>
+{% endif %}
